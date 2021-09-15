@@ -1,0 +1,8 @@
+1. Lag tat ca danh sach category trong database
+queryset = Category.objects.all()
+
+# co 4 loại cơ bản http method 
+-GET (lấy dữ liệu)
+-POST (dùng để thêm dử liệu)
+-PUT (cập nhập dữ liệu)
+-DELETE (Xóa dữ liêu)
