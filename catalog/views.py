@@ -1,7 +1,4 @@
-from django.shortcuts import render
-
-from django.http import HttpResponse
-from rest_framework import serializers, viewsets
+from rest_framework import viewsets
 from rest_framework.response import Response
 from .models import Category, Product
 from .serializes import CategorySerialize, ProductSerialize
@@ -25,11 +22,16 @@ class ProductViewSet(viewsets.ViewSet):
         serialize = ProductSerialize(products, many =True)
         return Response(serialize.data,status=status.HTTP_200_OK)
 
-    def create(self, request):        
+    def create(self, request):    
+        print(request.data)    
         serialize = ProductSerialize(data=request.data)
-        if serialize.is_valid():
-            serialize.save
+        try:
+            if serialize.is_valid(raise_exception=True):
+                serialize.save()
             return Response(serialize.data, status =status.HTTP_201_CREATED)
+        except Exception as e:
+            print(e)
+        
 
     def retrieve(self, request, pk=None):
         pass
